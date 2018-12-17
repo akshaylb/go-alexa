@@ -1,5 +1,13 @@
 package response
 
+type ability string
+
+const (
+	Yes   ability = "YES"
+	Maybe ability = "MAYBE"
+	No    ability = "NO"
+)
+
 type envelope struct {
 	Version           string                 `json:"version"`
 	SessionAttributes map[string]interface{} `json:"sessionAttributes,omitempty"`

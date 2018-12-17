@@ -93,30 +93,18 @@ func (r *Response) SetEndSession(flag *bool) *Response {
 	return r
 }
 
-func (r *Response) SetCanFulfillIntent(canFulfill *bool) *Response {
-	r.CanFulfillIntent.CanFulfill = "NO"
-	if *canFulfill {
-		r.CanFulfillIntent.CanFulfill = "YES"
-	}
-
+func (r *Response) SetCanFulfillIntent(flag ability) *Response {
+	r.CanFulfillIntent.CanFulfill = string(flag)
 	return r
 }
 
-func (r *Response) SetCanFulfillSlot(slot request.Slot, canUnderstand *bool, canFulfill *bool) {
+func (r *Response) SetCanFulfillSlot(slot request.Slot, canUnderstand ability, canFulfill ability) {
 	if r.CanFulfillIntent.Slots == nil {
 		r.CanFulfillIntent.Slots = make(map[string]Slot)
 	}
-	cU := "NO"
-	cF := "NO"
-	if *canUnderstand {
-		cU = "YES"
-	}
-	if *canFulfill {
-		cF = "YES"
-	}
 	r.CanFulfillIntent.Slots[slot.Name] = Slot{
-		CanFulfill:    cF,
-		CanUnderstand: cU,
+		CanFulfill:    string(canFulfill),
+		CanUnderstand: string(canUnderstand),
 	}
 }
 
