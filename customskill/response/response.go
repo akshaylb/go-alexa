@@ -94,7 +94,9 @@ func (r *Response) SetEndSession(flag *bool) *Response {
 }
 
 func (r *Response) SetCanFulfillIntent(flag ability) *Response {
-	r.CanFulfillIntent.CanFulfill = string(flag)
+	r.CanFulfillIntent = &CanFulfillIntent{
+		CanFulfill: string(flag),
+	}
 	return r
 }
 
