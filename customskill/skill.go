@@ -63,6 +63,15 @@ func (s *Skill) Handle(w io.Writer, b []byte) error {
 		}
 		// A skill cannot return a response to SessionEndedRequest.
 		return nil
+	case *request.CanFulfillIntentRequest:
+		if s.OnCanFulfillIntent == nil {
+			return errors.New("no OnCanFulfillIntent handler defined")
+		}
+		cfir := e.(*request.CanFulfillIntentRequest)
+		resp, sess, err = s.OnCanFulfillIntent(cfir, m)
+		if err != nil {
+			return errors.New("OnCanFulfillIntent handler failed: " + err.Error())
+		}
 	default:
 		return errors.New("unsupported request type: " + getType(e))
 	}
