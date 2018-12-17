@@ -11,4 +11,5 @@ type Skill struct {
 	OnLaunch            func(*request.LaunchRequest, *request.Metadata) (*response.Response, map[string]interface{}, error)
 	OnIntent            func(*request.IntentRequest, *request.Metadata) (*response.Response, map[string]interface{}, error)
 	OnSessionEnded      func(*request.SessionEndedRequest, *request.Metadata) error
+	OnCanFulfillIntent  func(*request.CanFulfillIntentRequest, *request.Metadata) (*response.Response, map[string]interface{}, error)
 }

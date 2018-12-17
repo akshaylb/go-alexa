@@ -1,5 +1,7 @@
 package response
 
+import "github.com/mikeflynn/go-alexa/customskill/request"
+
 func New() *Response {
 	return &Response{
 		ShouldEndSession: Bool(true),
@@ -89,6 +91,33 @@ func (r *Response) SetEndSession(flag *bool) *Response {
 	r.ShouldEndSession = flag
 
 	return r
+}
+
+func (r *Response) SetCanFulfillIntent(canFulfill *bool) *Response {
+	r.CanFulfillIntent.CanFulfill = "NO"
+	if *canFulfill {
+		r.CanFulfillIntent.CanFulfill = "YES"
+	}
+
+	return r
+}
+
+func (r *Response) SetCanFulfillSlot(slot request.Slot, canUnderstand *bool, canFulfill *bool) {
+	if r.CanFulfillIntent.Slots == nil {
+		r.CanFulfillIntent.Slots = make(map[string]Slot)
+	}
+	cU := "NO"
+	cF := "NO"
+	if *canUnderstand {
+		cU = "YES"
+	}
+	if *canFulfill {
+		cF = "YES"
+	}
+	r.CanFulfillIntent.Slots[slot.Name] = Slot{
+		CanFulfill:    cF,
+		CanUnderstand: cU,
+	}
 }
 
 func (r *Response) String() string {

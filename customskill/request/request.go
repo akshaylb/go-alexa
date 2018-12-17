@@ -37,6 +37,12 @@ func BootstrapFromJSON(data []byte) (*Metadata, interface{}, error) {
 			return nil, nil, errors.New("failed to unmarshal session ended request envelope: " + err.Error())
 		}
 		return &efu.Metadata, &env.Request, nil
+	case "CanFulfillIntentRequest":
+		var env canFulfillIntentRequestEnvelope
+		if err := jsonUnmarshal(data, &env); err != nil {
+			return nil, nil, errors.New("failed to unmarshal can fulfill intent request envelope: " + err.Error())
+		}
+		return &efu.Metadata, &env.Request, nil
 	default:
 		return nil, nil, errors.New("request type " + efu.Request.Type + " not supported")
 	}

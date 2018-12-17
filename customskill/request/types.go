@@ -23,6 +23,11 @@ type SessionEndedRequest struct {
 	Reason string `json:"reason,omitempty"`
 }
 
+type CanFulfillIntentRequest struct {
+	Common
+	Intent Intent `json:"intent"`
+}
+
 /* Types shared across request types */
 
 // Common contains properties common to all requests
@@ -113,4 +118,8 @@ type intentRequestEnvelope struct {
 
 type sessionEndedRequestEnvelope struct {
 	Request SessionEndedRequest `json:"request"`
+}
+
+type canFulfillIntentRequestEnvelope struct {
+	Request CanFulfillIntentRequest `json:"request"`
 }

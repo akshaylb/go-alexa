@@ -7,11 +7,12 @@ type envelope struct {
 }
 
 type Response struct {
-	OutputSpeech     *OutputSpeech `json:"outputSpeech,omitempty"`
-	Reprompt         *Reprompt     `json:"reprompt,omitempty"`
-	Card             *Card         `json:"card,omitempty"`
-	Directives       []interface{} `json:"directives,omitempty"`
-	ShouldEndSession *bool         `json:"shouldEndSession,omitempty"`
+	OutputSpeech     *OutputSpeech     `json:"outputSpeech,omitempty"`
+	Reprompt         *Reprompt         `json:"reprompt,omitempty"`
+	Card             *Card             `json:"card,omitempty"`
+	Directives       []interface{}     `json:"directives,omitempty"`
+	ShouldEndSession *bool             `json:"shouldEndSession,omitempty"`
+	CanFulfillIntent *CanFulfillIntent `json:"canFulfillIntent,omitempty"`
 }
 
 type OutputSpeech struct {
@@ -35,4 +36,14 @@ type Card struct {
 type Image struct {
 	SmallImageURL string `json:"smallImageUrl,omitempty"`
 	LargeImageURL string `json:"largeImageUrl,omitempty"`
+}
+
+type CanFulfillIntent struct {
+	CanFulfill string          `json:"canFulfill"`
+	Slots      map[string]Slot `json:"slots,omitempty"`
+}
+
+type Slot struct {
+	CanUnderstand string `json:"canUnderstand"`
+	CanFulfill    string `json:"canFulfill"`
 }
