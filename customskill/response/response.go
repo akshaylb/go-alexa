@@ -87,6 +87,15 @@ func (r *Response) SetLinkAccountCard() *Response {
 	return r
 }
 
+func (r *Response) SetAskForPermissionsConsentCard(permissions []string) *Response {
+	r.Card = &Card{
+		Type:        "AskForPermissionsConsent",
+		Permissions: permissions,
+	}
+
+	return r
+}
+
 func (r *Response) SetEndSession(flag *bool) *Response {
 	r.ShouldEndSession = flag
 

@@ -34,11 +34,12 @@ type Reprompt struct {
 }
 
 type Card struct {
-	Type    string `json:"type"`
-	Title   string `json:"title,omitempty"`
-	Content string `json:"content,omitempty"`
-	Text    string `json:"text,omitempty"`
-	Image   *Image `json:"image,omitempty"`
+	Type        string   `json:"type"`
+	Title       string   `json:"title,omitempty"`
+	Content     string   `json:"content,omitempty"`
+	Text        string   `json:"text,omitempty"`
+	Permissions []string `json:"permissions,omitempty"`
+	Image       *Image   `json:"image,omitempty"`
 }
 
 type Image struct {
